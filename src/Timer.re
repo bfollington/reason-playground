@@ -29,7 +29,7 @@ let timerEffect = (dispatch) =>
   WonkaJs.interval(1000)
     |> Wonka.forEach((._) => dispatch(Tick))
     |> _ => None;
-
+    
 [@react.component]
 let make = () => {
   let ({ timer }, dispatch) = React.useReducer(reducer, { timer: 0, running: false })
