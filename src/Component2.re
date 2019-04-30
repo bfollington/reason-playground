@@ -11,7 +11,7 @@ type action =
   | Start
   | Stop
   | Reset
-  | Tick;
+  | Tick
 
 let reducer = (state, action) =>
   switch (action) {
@@ -25,27 +25,28 @@ let reducer = (state, action) =>
       }      
   };
 
+let timerEffect = (dispatch) =>
+  WonkaJs.interval(1000)
+    |> Wonka.forEach((._) => dispatch(Tick))
+    |> _ => None;
+
 [@react.component]
 let make = () => {
   let ({ timer }, dispatch) = React.useReducer(reducer, { timer: 0, running: false })
 
-  React.useEffect1(() => 
-    WonkaJs.interval(1000)
-      |> Wonka.forEach((._) => dispatch(Tick))
-      |> _ => None
-  , [||]);
+  React.useEffect1(() => timerEffect(dispatch), [||]);
     
   <div>
     <button onClick={_event => dispatch(Start)}>
-      {str("Start")}
+      {"Start" |> str}
     </button>
     <button onClick={_event => dispatch(Stop)}>
-      {str("Stop")}
+      {"Stop" |> str}
     </button>
     <button onClick={_event => dispatch(Reset)}>
-      {str("Reset")}
+      {"Reset" |> str}
     </button>
 
-    <span>{str("Time: " ++ string_of_int(timer))}</span>
+    <span>{"Time: " ++ string_of_int(timer) |> str}</span>
   </div>
 };
