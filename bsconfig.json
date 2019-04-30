@@ -16,6 +16,7 @@
   "namespace": true,
   "bs-dependencies": [
     "wonka",
+    "bs-css",
     "reason-react"
   ],
   "refmt": 3

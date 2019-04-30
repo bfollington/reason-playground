@@ -47,6 +47,6 @@ let make = () => {
       {"Reset" |> str}
     </button>
 
-    <span>{"Time: " ++ string_of_int(timer) |> str}</span>
+    <span className=TimerStyles.timer>{"Time: " ++ string_of_int(timer) |> str}</span>
   </div>
 };
